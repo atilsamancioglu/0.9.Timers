@@ -10,15 +10,38 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var timeLabel: UILabel!
+    
+    var timer = Timer()
+    var counter = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        
+        counter = 5
+        timeLabel.text = String(counter)
+        
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.timerFunction), userInfo: nil, repeats: true)
+        
+        
+    }
+    
+    func timerFunction() {
+        
+        timeLabel.text = String(counter)
+        
+        counter = counter - 1
+        
+        if counter == 0 {
+            timer.invalidate()
+            timeLabel.text = "Your time is done!"
+        }
+    
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+ 
 
 
 }
